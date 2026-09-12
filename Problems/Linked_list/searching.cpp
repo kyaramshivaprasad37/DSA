@@ -67,15 +67,59 @@ void insertatK(int k, int ele) {
     p->next = d;
 }
 
+void circular() {
+    Node *temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = head;
+}
+
+void insertAtBeginCircular(int a) {
+    Node *temp = head;
+    while (temp->next != head) {
+        temp = temp->next;
+    }
+    Node *p = new Node(a);
+    temp->next = p;
+    p->next = head;
+    head = p;
+}
+
+void displayCircular() {
+    Node *temp = head;
+    cout << head->data << ' ';
+    while (temp->next != head) {
+        cout << temp->next->data << ' ';
+        temp = temp->next;
+    }
+    cout << '\n';
+}
+
+bool searchInCircular(int a) {
+    Node *temp = head;
+    while (temp->next != head) {
+        if (a == temp->data) {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
 int main() {
     insertAtBegin(1);
     insertAtBegin(2);
     insertAtBegin(3);
     insertAtBegin(4);
     // cout << search(5);
-    insertatK(2, 5);
-    insertatK(3, 6);
-    insertatK(0, 4);
-    display();
+    // insertatK(2, 5);
+    // insertatK(3, 6);
+    // insertatK(0, 4);
+    circular();
+    insertAtBeginCircular(5);
+    displayCircular();
+    cout << searchInCircular(6);
+    // display();
     return 0;
 }
